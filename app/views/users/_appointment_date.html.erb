@@ -1,0 +1,12 @@
+<center><h1>Appointment</h1></center>
+  <%= form_tag url_for(:controller => 'users', :action => 'send_appointment'), :method => 'post' do |f| %>  
+   
+    <p class="ex1"> 
+       Appointment Date :
+      <%= select_datetime(updappointment = Time.current, options = {order: [:day, :month, :year]}, html_options = {})  %>
+      <%= hidden_field_tag :cust_id,params[:data1]%>
+    </p>
+
+ <%= submit_tag "Submit",:class => "btn btn-info" %> 
+       
+<%end%>

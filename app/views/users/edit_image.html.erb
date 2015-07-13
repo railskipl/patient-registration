@@ -1,0 +1,51 @@
+
+<html>
+  <style>
+    p.ex1 {
+        padding: 0.3cm 2cm;
+      }
+  </style>
+
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+<body style="background:none;">
+<center><h1> Edit Image </h1></center>
+<%= form_for @image ,:url => url_for(:controller => 'users', :action => 'update_image') do |f| %>
+   
+ 
+     <p class="ex1">
+          <%= f.file_field :avatar %>  
+      </p> 
+     <%= f.hidden_field :id, :value => @image.id%>
+    <p class="ex1">
+      <%= f.submit "Update",:class => "btn btn-info" %>
+      <%if current_user.role == "super_admin" || current_user.role == "admin" %>
+         <%= link_to "Cancel", admin_path,:class => "btn btn-info" %>
+      <%else%>
+         <%= link_to "Cancel", custshow_path,:class => "btn btn-info" %>
+      <%end%>
+    </p>
+   <% end %>
+</body>
+
+
+</div>
+      </div>
+    </div>
+  </div> 
+</div>

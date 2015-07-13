@@ -1,0 +1,97 @@
+<html>
+
+  <style>
+    p.ex1 {
+        padding: 0.3cm 2cm;
+      }
+  </style>
+
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+<body style="background:none;">
+<center><h1> Edit Form </h1></center>
+<%= form_for @user do |f| %>
+ <% if @user.errors.any? %>  
+  <div class="error_messages">  
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>  
+    <ul>  
+    <% @user.errors.full_messages.each do |msg| %>  
+      <li><%= msg %></li>  
+    <% end %>  
+    </ul>  
+  </div>  
+  <% end %>  
+
+ <% if current_user.role == "admin"%>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+ <%end%>
+
+ <p class="ex1">
+    <%= f.label "Full Name" %><br />
+    <%= f.text_field :firstname, autofocus: true,:style => "border: 1px black solid; color: black;"%>
+ </p>
+  
+  <p class="ex1">
+    <%= f.label "User Name" %><br />
+    <%= f.text_field :username,:style => "border: 1px black solid; color: black;" %>
+  </p>
+    
+  <p class="ex1">
+    <%= f.label "Email Id" %><br />
+    <%= f.email_field :email,:style => "border: 1px black solid; color: black; padding:0.7em 2em 0.7em 1.7em;" %>
+  </p>
+
+  <p class="ex1">
+    <%= f.label "Password" %><br />
+    <% if @validatable %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password,autocomplete: "off",:style => "border: 1px black solid; color: black;" %>
+  </p>
+
+  <p class="ex1">
+    <%= f.label "Password Confirmation" %><br />
+    <%= f.password_field :password_confirmation,autocomplete: "off",:style => "border: 1px black solid; color: black;" %>
+  </p>
+  <p class="ex1">
+    <%= f.label "Roles" %><br />
+           <% if current_user.role == "super_admin"%>
+            <%= f.radio_button :role, 'admin' %> 
+            <%= f.label :role, 'Admin', :value => 'admin' %>
+           <%end%>
+      <%= f.radio_button :role, 'doctor' %> 
+      <%= f.label :role, 'Doctor', :value => 'doctor' %>
+      <%= f.radio_button :role, 'reception' %> 
+      <%= f.label :role, 'Reception', :value => 'reception' %>
+  </p>
+
+  <p class="ex1">
+      <%= f.collection_select :speciality_id, @specility, :id, :speciality_name,:prompt =>"Please Select Specilization for Doctor Only"  %>
+  </p>
+  
+  <p class="ex1">
+    <%= f.submit "Update",:class => "btn btn-info" %> 
+    <%= link_to "Cancel", admin_path,:class => "btn btn-info" %>
+  </p>
+<% end %>
+</body>
+</div>
+      </div>
+    </div>
+  </div> 
+</div>

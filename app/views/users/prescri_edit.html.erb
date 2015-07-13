@@ -1,0 +1,58 @@
+</script>
+<html>
+<head>
+  <style>
+    p.ex1 {
+        padding: 0.3cm 2cm;
+      }
+  </style>
+</head>
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+<center><h1> Edit Prescription</h1></center>
+  <%= form_for @user2,:url => url_for(:controller => 'users', :action => 'prescri_update') do |f| %>
+
+  <p class="ex1">
+      <%= f.label "Today's Date :" %><br />
+      <%= f.text_field :date_current, :value => DateTime.now.to_date,:style => "border: 1px black solid; color: black;"%>
+    </p>
+   
+    <p class="ex1">
+      <%= f.label "Prescription :" %><br />
+      <%= f.text_area :precription , autofocus: true,:style => "border: 1px black solid; color: black;"%>
+    </p>
+
+    <p class="ex1">
+      <%= f.label "Description :" %><br />
+      <%= f.text_area :description , autofocus: true,:style => "border: 1px black solid; color: black;"%>
+    </p>
+
+    <%= f.hidden_field :customer_id,:value => params[:customer_id]%>
+    <%= f.hidden_field :user_id,:value => current_user.id %>
+    <%= f.hidden_field :id,:value => params[:id] %>
+    <p class="ex1">
+    <%= f.submit "Update",:class => "btn btn-info" %> 
+    <%= link_to "Cancel", custshow_path, :class => "btn btn-info"%>
+  </p>
+
+<%end%>
+</div>
+      </div>
+    </div>
+  </div> 
+</div>

@@ -1,0 +1,86 @@
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<div>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a>
+			</li>
+			<li>	
+				<a href="#">Tables</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-header well" data-original-title="">
+					<h2><i class="glyphicon glyphicon-user"></i> Datatable</h2>
+				</div>
+                 <%if current_user.role == "admin" || current_user.role =="super_admin"%>
+				<div class="box-content">
+					<div class="alert alert-info"> 
+						<a class="btn btn-info" href="/admin/users/new">Add New User</a>
+						<a class="btn btn-info" href="/customer" data-no-turbolink="true">Add New Customer</a>
+						<a class="btn btn-info" href="/custshow">Show Customer</a>
+					</div>
+					<%else%>
+
+                      <div class="box-content">
+					  <div class="alert alert-info">
+					  <a class="btn btn-info" href="/customer" data-no-turbolink="true">Add   New Customer</a>
+					 <a class="btn btn-info" href="/custshow">Show Customer</a>
+					</div> 
+					<%end%>
+					<div>
+						<table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+							<thead>
+							<tr>
+								<th>Index No.</th>
+								<th>Full Name.</th>
+								<th>User Name.</th>
+								<th>Email.</th>
+								<th>Role.</th>
+								<th>Speciality</th>
+								<th>Actions</th>
+							</tr>
+							</thead>
+
+							<body style="background:none;">
+								<% @users.each_with_index do |f, index| %>
+								<tr>
+									<% index += 1%>
+									<td><%= index %></td>
+									<td class="center"><%= f.firstname %></td>
+									<td class="center"><%= f.username %></td>
+									<td class="center"><%= f.email %></td>
+									<td class="center"><%= f.role %></td>
+									  <% if f.role == "doctor"%> 
+										   <% special = Speciality.find(f.speciality_id)  %>
+									       <td class="center"><%= special.speciality_name %></td> 
+									  <%else%>
+									   <td class="center"><%=%></td> 
+                                      <%end%>
+									<td class="center">
+										<a class="btn btn-info" href="/admin/users/<%= f.id %>/edit"><i class="glyphicon glyphicon-edit icon-white"></i>
+										Edit</a>
+										<a class="btn btn-danger" href="/users/<%= f.id %>/delete" onclick="if(confirm('Are you sure you want to delete this Data?'))  return true;  else  return false;" class="button negative"><i class="glyphicon glyphicon-trash icon-white"></i>Delete</a>
+										<% if current_user.role == "super_admin"%>   
+                                           <% if f.status? %>
+												<a class="btn btn-danger" href="/users/<%= f.id %>/block" onclick="if(confirm('Are you sure you want to Active this User?'))  return true;  else  return false;" class="button negative"><i class="glyphicon glyphicon-edit icon-white"></i>In-Active</a>
+										    <%else%>	
+	                                            <a class="btn btn-info" href="/users/<%= f.id %>/block" onclick="if(confirm('Are you sure you want to In-Active this User?'))  return true;  else  return false;" class="button negative"><i class="glyphicon glyphicon-edit icon-white"></i>Active</a>
+                                            <%end%>
+	                                    <%end%>
+									</td>
+								 </tr>
+							  <%end%>
+							</body>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+

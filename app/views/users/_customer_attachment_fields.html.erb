@@ -1,0 +1,14 @@
+</script>
+<style>
+p.ex1 {
+    padding: 0.3cm 2cm;
+}
+</style>
+<p class="ex1">
+	<%= f.file_field :avatar %>
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, "Remove" %>
+    <%#= link_to_remove_fields "remove", f %>
+    <%#= f.link_to_remove "remove" %>
+</p>
+	

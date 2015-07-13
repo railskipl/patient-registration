@@ -1,0 +1,55 @@
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+<%if @user_doctor == []%>
+ <center><h2><%= flash[:notice] = "There is Not Giving Any Prescription Yet by Doctor."%></h2></br>
+    <%= link_to "Back", custshow_path,:class => "btn btn-info" %>
+    <%= link_to"Prescription", prescription_path(:customer => params[:customer]), :class=>"btn btn-info"%>
+ </center>
+
+<%else%>
+
+   
+<style>
+p.ex1 {
+    padding: 0.3cm 4.3cm;
+}
+</style>
+
+   <center><h3>Prescription Page</h3></center>
+    <article>
+      <header>
+      	<% @user_doctor.each_with_index do |f,index|%>
+      	  <h2><p class="ex1">Description :</p></h2>
+          <h3><p class="ex1"><%= f.description %></p></h3>
+          </header>     
+      	  <% index += 1%>
+          <h3><p class="ex1"><%= index %>. Prescription Date</p></h3>
+          <h4><p class="ex1"><%= f.date_current %></p></h4>
+          <h3><p class="ex1">Prescription</p></h3>
+          <h4><p class="ex1"><%= f.precription %></p></h4>
+      	<%end%>
+	</article>
+	<p class="ex1">
+		<%= link_to "Back", custshow_path,:class => "btn btn-info" %>
+    <%= link_to"Prescription", prescription_path(:customer => params[:customer]), :class=>"btn btn-info" %>
+  </p>                                            
+  <%end%>
+	</div>
+   </div>
+  </div>
+ </div> 
+</div>

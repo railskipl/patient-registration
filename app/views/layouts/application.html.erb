@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Task</title>
+  <%= stylesheet_link_tag    "application"%>
+  <%= javascript_include_tag "application"%> <!-- , "data-turbolinks-track" => true %> -->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<style>
+div.ex1 {
+    float:right;
+}
+</style>
+    <!-- <div class="ex1"> -->
+      <div class="container">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><center><%= value %></center></div>
+        <% end %>
+       </div>
+        
+           <% if user_signed_in? %>
+              <!-- &nbsp;&nbsp;&nbsp;&nbsp;Logged in as <strong><%= current_user.email %><div></strong>. -->
+              <!-- <div class="ex1"><strong><%#= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'%></strong></div> -->
+              <%=render 'layouts/header'%>
+              <%= yield %>
+              <%=render 'layouts/footer'%>
+           <% else %>
+              <%#= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> 
+              <p align="center"> <%#= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></p> 
+                <%= yield %>
+           <% end %>
+       
+</body>
+</html>

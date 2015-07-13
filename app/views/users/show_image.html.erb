@@ -1,0 +1,38 @@
+<html>
+
+  <style>
+    p.ex1 {
+        padding: 0.3cm 2cm;
+      }
+  </style>
+
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+
+<center><h1> Selected File </h1></center></br>
+ 
+  <center><%= image_tag(@image.avatar_url)  %></center><br />
+                    <center>  <a class="btn btn-info" href="/change_image/<%= @image.id %>/edit"><i class="glyphicon glyphicon-edit icon-white"></i>
+                      Edit</a>
+                      <a class="btn btn-danger" href="/cust_image/<%=@image.id %>/delete" onclick="if(confirm('Are you sure you want to delete this Data?'))  return true;  else  return false;" class="button negative"><i class="glyphicon glyphicon-trash icon-white"></i>Delete</a></center>
+ 
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>

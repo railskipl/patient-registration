@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Creative Web Typography Styles</title>
+        <meta name="description" content="Creative Web Typography Styles - Having fun with text styles and effects" />
+        <meta name="keywords" content="css3, typography, styles, letters, creative, effects, transitions, animations" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="#" />
+        <link rel="stylesheet" type="text/css" href="#" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300|Sancreek|Raleway:100' rel='stylesheet' type='text/css' />
+    <!--[if lte IE 8]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+    </head>
+    <body style="background-image:url(/assets/field.jpg)">
+        <div class="container">
+    
+      <!-- Codrops top bar -->
+            <div class="codrops-top">
+                <a href="#">
+                </a>
+                <div class="clr"></div>
+            </div><!--/ Codrops top bar -->
+      
+      <header>
+      
+        <h1><strong>DOCTORS</strong> </h1>
+        <h2>"Find The Right Doctor <strong>FOR YOU ! </strong></h2>
+            
+      </header>
+      
+      <section class="main">
+        
+        <h2 class="cs-text">
+          <span class="cs-text-cut">Rx</span>
+          <div class="login-form">
+          <div class="head">
+            <img src="images/mem2.jpg" alt=""/>
+            
+          </div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+                                        <li>
+                                          <a class="icon user"></a>
+                                          <%= f.text_field :username,:value =>"USERNAME",:onfocus =>"this.value = '';",:onblur =>"if (this.value == '',)",:style => "border: none; color: #fff; padding:0.7em 2em 0.7em 1.7em;"%>
+                                        </li>
+                                        <li>
+                                         <a  class=" icon lock"></a>
+                                          <%= f.password_field :password, autocomplete: "off",:style => "border: none; color: #fff;padding:0.7em 2em 0.7em 1.7em;"%>
+                                        </li>
+<!-- 
+           <li>
+            <input type="text" class="text" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" ><a href="#" class="icon user"></a>
+          </li> -->
+        <!--   <li>
+            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"><a href="#" class=" icon lock"></a>
+          </li>
+          <div class="p-container">
+                <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember Me</label>
+                                
+                <input type="submit" onclick="myFunction()" value="SIGN IN" >
+                               
+              <div class="clear"> </div>
+                           
+                             
+          </div> -->
+
+
+                                    <!-- div class="clearfix"></div><br>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+                                        <%#= f.password_field :password, autocomplete: "off", :placeholder => "Password", :class =>"form-control" %>
+                                    </div> -->
+                                   <!--  <div class="clearfix"></div>
+                                    <div class="input-prepend">
+                                        <%# if devise_mapping.rememberable? -%>
+                                            <label class="remember" for="remember"><%#= f.check_box :remember_me %> Remember me</label>
+                                        <%#end%>
+                                    </div> -->
+                                    <!-- <div class="clearfix"></div>
+                                        <p class="center col-md-5">
+                                          <%#= f.submit "Login",:class=>"btn btn-primary" %>
+                                        </p> -->
+                                        <div class="p-container">
+                <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember Me</label>
+                                
+          
+                 <%= f.submit "Login",:value =>"SIGN IN" %>              
+              <div class="clear"> </div>
+                           
+                             
+          </div>
+                              <!-- </fieldset> -->
+                          <%end%>
+        
+      </div>
+    <span class="cs-text-cut"fsgfs></span>
+        </h2>
+        
+      </section>
+
+
+    
+        </div>
+
+    <script>
+      $(document).ready(function() {
+        $(".cs-text-cut").lettering('words');
+      });
+    </script>
+    </body>
+</html>

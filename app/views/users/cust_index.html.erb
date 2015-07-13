@@ -1,0 +1,115 @@
+ <%= javascript_include_tag "facebox.js" %>
+ <%= stylesheet_link_tag "facebox.css" %>
+<script>   
+    function myFunction(a) {
+    	  var id = a; 
+          $.ajax({
+          type: "POST",
+          data: {data1 : id},
+          url: "<%= appointment_date_path %>",
+          });
+    };
+</script>
+<div id="content" class="col-lg-10 col-sm-10">
+	<div>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a>
+			</li>
+			<li>	
+				<a href="#">Tables</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-header well" data-original-title="">
+					<h2><i class="glyphicon glyphicon-user"></i> Datatable</h2>
+				</div>
+
+				<%if current_user.role == "admin" || current_user.role =="super_admin"%>
+				<div class="box-content">
+					<div class="alert alert-info"> 
+						<a class="btn btn-info" href="/admin/users/new">Add New User</a>
+						<a class="btn btn-info" href="/customer" data-no-turbolink="true">Add New Customer</a>
+						<a class="btn btn-info" href="/custshow">Show Customer</a>
+					</div>
+					<%else%>
+
+                      <div class="box-content">
+					  <div class="alert alert-info">
+					  <a class="btn btn-info" href="/customer" data-no-turbolink="true">Add New Customer</a>
+					 <a class="btn btn-info" href="/custshow">Show Customer</a>
+					</div> 
+					<%end%>
+
+					<div>
+						<table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+							<thead>
+							<tr>
+								<th>Index No.</th>
+								<th>Full Name</th>
+								<th>Age</th>
+								<th>Image</th>
+								<th>Register Date</th>
+								<th>Appoinment Date</th>
+								<th>Action</th>
+							</tr>
+							</thead>
+							<body style="background:none;">
+								<% @user1.each_with_index do |f,index| %>
+									<tr>
+										<% index += 1%>
+										<td><%= index %></td>
+										<td class="center"><%= f.name %></td>
+										<td class="center"><%= f.age %></td>
+										<%if f.avatar == nil %>
+											<%if f.customer_attachments == []%>
+											    <td><%= %></td>
+	                                        <%else%>
+	                                              <td class="center"><% f.customer_attachments.each_with_index do |p,i| %>
+		                                               <%i+=1%>
+		                                               <%= i%>.=>
+											           <%=(link_to p.avatar_url,image_path(:id => f.id,:avatar => p.id),target: "_blank")%> 
+											                <br />
+											           <%end%>
+											       </td>
+											<%end%>
+                                        <%else%>
+                                            <td><%= %></td>
+										<%end%>
+										
+									    <td class="center"><%= f.created_at.to_date %></td>
+									    <td class="center"><%= f.updappointment%></td>
+										<td class="center">
+											<a class="btn btn-info" href="/custshow/<%= f.id %>/edit"><i class="glyphicon glyphicon-edit icon-white"></i>
+										     Edit</a>
+											<a class="btn btn-danger" href="/custshow/<%= f.id %>/delete" onclick="if(confirm('Are you sure you want to delete this Data?'))  return true;  else  return false;" class="button negative"><i class="glyphicon glyphicon-trash icon-white"></i>Delete</a>
+
+											<%= link_to  "javascript:void(0);",:onclick=>"myFunction(#{f.id})", :class=>"btn btn-info"  do %>
+											     <i class="glyphicon glyphicon-edit icon-white"></i>Appoinment
+											<%end%>
+
+											<% if current_user.role == "doctor"%>
+	                                            <%= link_to prescriptionlist_path(:customer => f.id), :class=>"btn btn-danger" do%>
+	                                            <i class="glyphicon glyphicon-trash icon-white"></i>Show Prescription
+	                                            <%end%>
+                                            <%end%>
+										</td>
+									</tr>
+								<%end%>
+							</body>
+						</table>
+						  <%if current_user.role == "super_admin" || current_user.role == "admin" %>
+					         <%= link_to "Cancel", admin_path,:class => "btn btn-info" %>
+					      <%else%>
+					         <%= link_to "Cancel", custshow_path,:class => "btn btn-info" %>
+					      <%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>

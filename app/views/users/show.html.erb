@@ -1,0 +1,33 @@
+  
+<style>
+p.ex1 {
+    padding: 0.3cm 5.5cm;
+}
+</style>
+
+   <center><h3>Details Page</h3></center>
+    <article>
+      <header>
+        <h1><%= @user.email %></h1>
+      </header>
+  <h3>Full Name</h3>
+  <p>
+    <%= @user.firstname %>
+  </p>
+  
+  <h3>User Name</h3>
+  <p>
+    <%= @user.username %>
+  </p>
+ 
+  <h3>Email</h3>
+  <p>
+    <%= @user.email %>
+  </p>
+  <h3>Role</h3>
+  <p>
+    <%= @user.role %>
+  </p>
+</article>
+<p class="ex1">
+<%= link_to "Back", other_path,:class => "btn btn-info" %></p>

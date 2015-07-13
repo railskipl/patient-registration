@@ -1,0 +1,115 @@
+<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(function($){
+       $("#customer_dob").datepicker({changeMonth: true,
+      changeYear: true,
+      selectOtherMonths: true,
+      dateFormat: "mm/dd/yy" ,
+      yearRange: "1900:2050",
+       maxDate: '+0d',
+    onSelect: function (date) {
+      var dob = new Date(date);
+      var today = new Date();
+      var age = today.getFullYear()-dob.getFullYear() ;
+      var a = age;
+      document.getElementById("customer_age").value = a;
+    }
+        });
+       });
+
+</script>
+<style>
+p.ex1 {
+    padding: 0.3cm 2cm;
+}
+
+
+</style>
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+        
+<body style="background:none;">
+  <div class="other">
+<center><h1>New customer</h1></center>
+  <%= form_for @user1,:url => url_for(:controller => 'users', :action => 'cust_create'),:html => { :multipart => true } do |f| %>
+
+     <% if @user1.errors.any? %>  
+        <div class="error_messages">  
+          <h2><%= pluralize(@user1.errors.count, "error") %> prohibited this user from being saved:</h2>  
+          <ul>  
+            <% @user1.errors.full_messages.each do |msg| %>  
+              <li><%= msg %></li>  
+            <% end %>  
+          </ul>  
+        </div>  
+     <% end %>
+    
+    
+    <% if current_user.role == "doctor"%>
+       <%= f.hidden_field :doc_id, :value => current_user.id  %>
+       <%= f.hidden_field :user_id, :value => current_user.user_id  %>
+    <%elsif current_user.role == "reception"%>
+       <%= f.hidden_field :reception_id, :value => current_user.id  %>
+       <%= f.hidden_field :user_id, :value => current_user.user_id  %>
+    <%else current_user.role == "admin"%>
+        <%= f.hidden_field :user_id, :value => current_user.id  %>
+    <%end%>
+
+
+    <p class="ex1">
+      <%= f.label "Full Name :" %><br />
+      <%= f.text_field :name, autofocus: true,:required => true,:style => "border: 1px black solid; color: black;"%>
+    </p>
+   
+    <p class="ex1">
+      <%= f.label "Date Of Birth" %><br />
+      <%= f.text_field :dob, :class => 'text_field' , :autocomplete=>"off",:readonly => true,:style => "border: 1px black solid; color: black;"%>
+    </p>
+    <p class="ex1">
+      <%= f.label "Age" %><br />
+      <%= f.text_field :age, :class => 'text_field' , :required => "true",:style => "border: 1px black solid; color: black;" %><br />
+    </p>
+
+    <%= f.fields_for :customer_attachments do |builder| %>
+        <%= render "customer_attachment_fields", :f => builder %>
+    <% end %>
+    <p class="ex1"><%= link_to_add_fields "Add Attachment", f, :customer_attachments %></p>
+       
+    <%if current_user.role == "reception" || current_user.role == "admin"%>
+      <p class="ex1">
+        <%= f.label "Doctor"%><br />
+        <%= f.collection_select :doc_id, @user,:id, :firstname ,:prompt =>"Please Select Doctor"%>
+      </p> 
+    <%end%>
+    <p class="ex1">
+    <%= f.submit "Create",:class => "btn btn-info" %> 
+    <%if current_user.role == "super_admin" || current_user.role == "admin" %>
+         <%= link_to "Cancel", admin_path,:class => "btn btn-info" %>
+      <%else%>
+         <%= link_to "Cancel", custshow_path,:class => "btn btn-info" %>
+      <%end%>
+  </p>
+  <% end %>
+</div>
+  </body>
+
+      </div>
+      </div>
+    </div>
+  </div> 
+</div>

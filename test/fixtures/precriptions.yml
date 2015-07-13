@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_current: 2015-06-23
+  precription: MyText
+  user_id: 1
+  customer_id: 1
+
+two:
+  date_current: 2015-06-23
+  precription: MyText
+  user_id: 1
+  customer_id: 1

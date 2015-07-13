@@ -1,0 +1,65 @@
+</script>
+<html>
+<head>
+  <style>
+    p.ex1 {
+        padding: 0.3cm 2cm;
+      }
+  </style>
+</head>
+
+<div id="content" class="col-lg-10 col-sm-10">
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>  
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+
+<body style="background:none;">
+<center><h1>Change Password</h1></center>
+  <%= form_for @user,:url => url_for(:controller => 'users',:action => 'update_user') do |f|%>
+  
+
+  <% if @user.errors.any? %>
+  <div class="error_messages"> 
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+   <%end%>
+
+  <p class="ex1">
+    <%= f.label "Password" %><br />
+    <% if @validatable %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password,autocomplete: "off",:required => true,:style => "border: 1px black solid; color: black;" %>
+  </p>
+
+  <p class="ex1">
+    <%= f.label "Password Confirmation" %><br />
+    <%= f.password_field :password_confirmation,autocomplete: "off",:required => true,:style => "border: 1px black solid; color: black;" %>
+  </p>
+
+   <%= f.hidden_field :id, :value => @user.id%>
+  <p class="ex1">
+    <%= f.submit "Update",:class => "btn btn-info" %> 
+    <%= link_to "Cancel", custshow_path,:class => "btn btn-info" %>
+  </p>
+<%end%>
+</body>
+</div>
+      </div>
+    </div>
+  </div> 
+</div>
